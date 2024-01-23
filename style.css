@@ -1,0 +1,7 @@
+.hidden{
+    filter: brightness(0);
+}
+
+.show{
+    filter: brightness(1);
+}
