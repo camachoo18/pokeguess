@@ -34,11 +34,47 @@ async function mi_peticion() {
     console.log(`Sprite URL: ${spriteUrl2}`);
     console.log(`Nombre: ${nombre3}`);
     console.log(`Sprite URL: ${spriteUrl3}`);
+
+    const imgElement = document.createElement('img');
+    imgElement.src = spriteUrl;
+
+    const imgElement1 = document.createElement('img');
+    imgElement1.src = spriteUrl1;
+
+    const imgElement2 = document.createElement('img');
+    imgElement2.src = spriteUrl2;
+
+    const imgElement3 = document.createElement('img');
+    imgElement3.src = spriteUrl3;
+
+    document.body.innerHTML =
+    `
+    <div class="pokemon-square">
+
+    <input type="submit"  value = "${pkmn.name}" />
+    <p class="pokemon-card"></p>
+    <input type="submit"  value = "${pkmn1.name}" />
+    <p class="pokemon-card1"></p>
+    <input type="submit"  value = "${pkmn2.name}" />
+    <p class="pokemon-card2"></p>
+    <input type="submit"  value = "${pkmn3.name}" />
+    <p class="pokemon-card3"></p>
+
+    </div>
+    `
+
+    const pokemonCard = document.querySelector('.pokemon-card');
+    pokemonCard.appendChild(imgElement);
+    const pokemonSquare = document.querySelector('.pokemon-square');
+    const pokemonImage = document.querySelector('.pokemon-image');
+
+
+
 }
 
 
 mi_peticion();
 
 
-
+//1 imagen, 4 nombres con 4 botones asociados
 
