@@ -1,80 +1,51 @@
-
+//Script para capturar pokemons en la pokeAPI:
 async function getPkmn(numero) {
     const url = `https://pokeapi.co/api/v2/pokemon/${numero}`;
     const respuesta = await fetch(url);
     const datos = await respuesta.json();
-    return datos;
-}
-
- function obtenerNumeroAleatorio(max) {
-    return Math.floor(Math.random() * max) + 1;
-}
-
-async function mi_peticion() {
-    const pkmn = await getPkmn(obtenerNumeroAleatorio(1008));
-    const pkmn1= await getPkmn(obtenerNumeroAleatorio(1008));
-    const pkmn2 = await getPkmn(obtenerNumeroAleatorio(1008));
-    const pkmn3 = await getPkmn(obtenerNumeroAleatorio(1008));
-
-    const nombre = pkmn.name;
-    const nombre1 = pkmn1.name;
-    const nombre2 = pkmn2.name;
-    const nombre3 = pkmn3.name;
-
-    const spriteUrl = pkmn.sprites.front_default;
-    const spriteUrl1 = pkmn1.sprites.front_default;
-    const spriteUrl2 = pkmn2.sprites.front_default;
-    const spriteUrl3 = pkmn3.sprites.front_default;
-
-    console.log(`Nombre: ${nombre}`);
-    console.log(`Sprite URL: ${spriteUrl}`);
-    console.log(`Nombre: ${nombre1}`);
-    console.log(`Sprite URL: ${spriteUrl1}`);
-    console.log(`Nombre: ${nombre2}`);
-    console.log(`Sprite URL: ${spriteUrl2}`);
-    console.log(`Nombre: ${nombre3}`);
-    console.log(`Sprite URL: ${spriteUrl3}`);
-
-    const imgElement = document.createElement('img');
-    imgElement.src = spriteUrl;
-
-    const imgElement1 = document.createElement('img');
-    imgElement1.src = spriteUrl1;
-
-    const imgElement2 = document.createElement('img');
-    imgElement2.src = spriteUrl2;
-
-    const imgElement3 = document.createElement('img');
-    imgElement3.src = spriteUrl3;
-
-    document.body.innerHTML =
-    `
-    <div class="pokemon-square">
-
-    <input type="submit"  value = "${pkmn.name}" />
-    <p class="pokemon-card"></p>
-    <input type="submit"  value = "${pkmn1.name}" />
-    <p class="pokemon-card1"></p>
-    <input type="submit"  value = "${pkmn2.name}" />
-    <p class="pokemon-card2"></p>
-    <input type="submit"  value = "${pkmn3.name}" />
-    <p class="pokemon-card3"></p>
-
-    </div>
-    `
-
-    const pokemonCard = document.querySelector('.pokemon-card');
-    pokemonCard.appendChild(imgElement);
-    const pokemonSquare = document.querySelector('.pokemon-square');
-    const pokemonImage = document.querySelector('.pokemon-image');
-
-
+    return datos
 
 }
 
 
-mi_peticion();
+async function mi_peticion(){
+    const numeroAleatorio = generarNumeroAleatorio();
+    const numeroAleatorio1 = generarNumeroAleatorio();
+    const numeroAleatorio2 = generarNumeroAleatorio();
+    const numeroAleatorio3 = generarNumeroAleatorio();
+    
+    const pkmn = await getPkmn(numeroAleatorio);
+    const pkmn1 = await getPkmn(numeroAleatorio1);
+    const pkmn2 = await getPkmn(numeroAleatorio2);
+    const pkmn3 = await getPkmn(numeroAleatorio3);
+
+    const {front_default} = pkmn.sprites
+    const urlImagenFrontal = front_default
+    
+    const imgPokemon = document.getElementById("imgPokemon");
+    imgPokemon.src = urlImagenFrontal;
 
 
-//1 imagen, 4 nombres con 4 botones asociados
+    mostrarNombrePokemon(pkmn.name, pkmn1.name, pkmn2.name, pkmn3.name);
+}
+mi_peticion()
 
+function mostrarNombrePokemon(nombrePokemon, nombrePokemon1, nombrePokemon2, nombrePokemon3) {
+
+    const btnObtenerPokemon = document.getElementById("pkmon");
+    const btnObtenerPokemon1 = document.getElementById("pkmon1");
+    const btnObtenerPokemon2 = document.getElementById("pkmon2");
+    const btnObtenerPokemon3 = document.getElementById("pkmon3");
+    
+    btnObtenerPokemon.value = `${nombrePokemon}`;
+    btnObtenerPokemon1.value = `${nombrePokemon1}`;
+    btnObtenerPokemon2.value = `${nombrePokemon2}`;
+    btnObtenerPokemon3.value = `${nombrePokemon3}`;
+}
+
+function generarNumeroAleatorio(){
+    return Math.floor(Math.random() * 999) + 1;
+}
+
+const obtenerPokemon = document.getElementById("obtenerPokemon");
+obtenerPokemon.addEventListener("click", mi_peticion);
