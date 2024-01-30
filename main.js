@@ -1,4 +1,3 @@
-//Script para capturar pokemons en la pokeAPI:
 async function getPkmn(numero) {
     const url = `https://pokeapi.co/api/v2/pokemon/${numero}`;
     const respuesta = await fetch(url);
@@ -25,6 +24,9 @@ async function mi_peticion(){
     const imgPokemon = document.getElementById("imgPokemon");
     imgPokemon.src = urlImagenFrontal;
 
+    
+
+
 
     mostrarNombrePokemon(pkmn.name, pkmn1.name, pkmn2.name, pkmn3.name);
 }
@@ -43,9 +45,23 @@ function mostrarNombrePokemon(nombrePokemon, nombrePokemon1, nombrePokemon2, nom
     btnObtenerPokemon3.value = `${nombrePokemon3}`;
 }
 
+
 function generarNumeroAleatorio(){
     return Math.floor(Math.random() * 999) + 1;
 }
 
-const obtenerPokemon = document.getElementById("obtenerPokemon");
-obtenerPokemon.addEventListener("click", mi_peticion);
+document.addEventListener("DOMContentLoaded", function() {
+    const obtenerPokemon = document.getElementById("pkmon");
+    obtenerPokemon.addEventListener("click", function() {
+        const imagenDesenfocada = document.getElementById('imagenDesenfocada');
+        imagenDesenfocada.classList.remove('hidden');
+        imagenDesenfocada.classList.add('show');
+
+
+        const imgPokemon = document.getElementById("imgPokemon");
+        imgPokemon.classList.add('show');
+
+
+        mi_peticion();
+    });
+});

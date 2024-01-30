@@ -61,3 +61,19 @@ input{
 
 
 }
+
+.pregunta{
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    position: absolute;
+    top: 10;
+
+}
+.hidden {
+    filter: brightness(0);
+}
+
+.show {
+    filter: brightness(1);
+}
