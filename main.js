@@ -5,7 +5,9 @@ async function getPkmn(numero) {
     return datos;
 }
 
-
+function generarNumeroAleatorio() {
+    return Math.floor(Math.random() * 999) + 1;
+}
 
 async function mi_peticion() {
     const imagenDesenfocada = document.querySelector('#imagenDesenfocada');
@@ -31,12 +33,36 @@ async function mi_peticion() {
 
     mostrarNombrePokemon(pkmn.name, pkmn1.name, pkmn2.name, pkmn3.name);
 
+    const opciones = {
+        win: pkmn.name,
+        lose1: pkmn1.name,
+        lose2: pkmn2.name,
+        lose3: pkmn3.name
+    };
+
+    updateOpciones(opciones);
+}
+
+function updateOpciones(opciones) {
+    const opcion0 = document.querySelector("#opcion0");
+    const opcion1 = document.querySelector("#opcion1");
+    const opcion2 = document.querySelector("#opcion2");
+    const opcion3 = document.querySelector("#opcion3");
+
+    const botones = [opcion0, opcion1, opcion2, opcion3];
+    botones.sort(() => Math.random() - 0.5);
+
+    botones[0].value = opciones.win;
+    botones[1].value = opciones.lose1;
+    botones[2].value = opciones.lose2;
+    botones[3].value = opciones.lose3;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    mi_peticion();
+    mi_peticion();  
 
     const obtenerPokemonBotones = document.querySelectorAll("#pkmon, #pkmon1, #pkmon2, #pkmon3");
+
 
     obtenerPokemonBotones.forEach(function (boton) {
         boton.addEventListener("click", function () {
@@ -44,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 function mostrarNombrePokemon(nombrePokemon, nombrePokemon1, nombrePokemon2, nombrePokemon3) {
     const btnObtenerPokemon = document.querySelector("#pkmon");
     const btnObtenerPokemon1 = document.querySelector("#pkmon1");
@@ -54,8 +81,4 @@ function mostrarNombrePokemon(nombrePokemon, nombrePokemon1, nombrePokemon2, nom
     btnObtenerPokemon1.value = `${nombrePokemon1}`;
     btnObtenerPokemon2.value = `${nombrePokemon2}`;
     btnObtenerPokemon3.value = `${nombrePokemon3}`;
-}
-
-function generarNumeroAleatorio() {
-    return Math.floor(Math.random() * 999) + 1;
 }
