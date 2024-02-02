@@ -33,28 +33,29 @@ async function mi_peticion() {
 
     mostrarNombrePokemon(pkmn.name, pkmn1.name, pkmn2.name, pkmn3.name);
 
-    const pregunta = {
+    const opciones = {
         win: pkmn.name,
-        winImg: pkmn.imgPokemon,
         lose1: pkmn1.name,
         lose2: pkmn2.name,
-        lose3: pkmn3.name,
-    }
-    updateOpciones(pregunta);
-    
-    const form = document.querySelector("#form-jugador")
-    
-    const newForm = form.cloneNode(true);
-    form.parentNode.replaceChild(newForm, form);
-    newForm.addEventListener("click", (e) => {
-        e.preventDefault();
-        const imgPokemon = document.getElementById("imgPokemon");
-        imgPokemon.src = pregunta.winImg;
-        imgPokemon.className = "show"
-        const opcion = e.target.value;
-        console.log(opcion);
-    })
-    
+        lose3: pkmn3.name
+    };
+
+    updateOpciones(opciones);
+}
+
+function updateOpciones(opciones) {
+    const opcion0 = document.querySelector("#opcion0");
+    const opcion1 = document.querySelector("#opcion1");
+    const opcion2 = document.querySelector("#opcion2");
+    const opcion3 = document.querySelector("#opcion3");
+
+    const botones = [opcion0, opcion1, opcion2, opcion3];
+    botones.sort(() => Math.random() - 0.5);
+
+    botones[0].value = opciones.win;
+    botones[1].value = opciones.lose1;
+    botones[2].value = opciones.lose2;
+    botones[3].value = opciones.lose3;
 }
 mi_peticion()
 
