@@ -5,7 +5,9 @@ async function getPkmn(numero) {
     return datos;
 }
 
-
+function generarNumeroAleatorio() {
+    return Math.floor(Math.random() * 999) + 1;
+}
 
 async function mi_peticion() {
     const imagenDesenfocada = document.querySelector('#imagenDesenfocada');
@@ -31,12 +33,36 @@ async function mi_peticion() {
 
     mostrarNombrePokemon(pkmn.name, pkmn1.name, pkmn2.name, pkmn3.name);
 
+    const pregunta = {
+        win: pkmn.name,
+        winImg: pkmn.imgPokemon,
+        lose1: pkmn1.name,
+        lose2: pkmn2.name,
+        lose3: pkmn3.name,
+    }
+    updateOpciones(pregunta);
+    
+    const form = document.querySelector("#form-jugador")
+    
+    const newForm = form.cloneNode(true);
+    form.parentNode.replaceChild(newForm, form);
+    newForm.addEventListener("click", (e) => {
+        e.preventDefault();
+        const imgPokemon = document.getElementById("imgPokemon");
+        imgPokemon.src = pregunta.winImg;
+        imgPokemon.className = "show"
+        const opcion = e.target.value;
+        console.log(opcion);
+    })
+    
 }
+mi_peticion()
 
 document.addEventListener("DOMContentLoaded", function () {
-    mi_peticion();
+    mi_peticion();  
 
     const obtenerPokemonBotones = document.querySelectorAll("#pkmon, #pkmon1, #pkmon2, #pkmon3");
+
 
     obtenerPokemonBotones.forEach(function (boton) {
         boton.addEventListener("click", function () {
@@ -44,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 function mostrarNombrePokemon(nombrePokemon, nombrePokemon1, nombrePokemon2, nombrePokemon3) {
     const btnObtenerPokemon = document.querySelector("#pkmon");
     const btnObtenerPokemon1 = document.querySelector("#pkmon1");
@@ -54,8 +81,4 @@ function mostrarNombrePokemon(nombrePokemon, nombrePokemon1, nombrePokemon2, nom
     btnObtenerPokemon1.value = `${nombrePokemon1}`;
     btnObtenerPokemon2.value = `${nombrePokemon2}`;
     btnObtenerPokemon3.value = `${nombrePokemon3}`;
-}
-
-function generarNumeroAleatorio() {
-    return Math.floor(Math.random() * 999) + 1;
 }
