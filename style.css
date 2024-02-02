@@ -67,11 +67,12 @@ input{
 .pregunta{
     display: flex;
     flex-direction: column;
-    padding: 0px;
-    margin-bottom: 5px;
-    top: 10;
-
+    margin-top: 11em;
+    position: absolute;
+    top: 0;
 }
+
+
 .hidden {
     filter: brightness(0);
 
